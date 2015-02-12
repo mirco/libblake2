@@ -1,0 +1,30 @@
+# http://www.gnu.org/software/automake
+
+Makefile.in
+
+# http://www.gnu.org/software/autoconf
+
+/autom4te.cache
+/aclocal.m4
+/compile
+/configure
+/depcomp
+/install-sh
+/missing
+/stamp-h1
+/m4
+Makefile
+config.*
+
+# http://www.gnu.org/software/libtool
+.libs/
+ar-lib
+libtool
+ltmain.sh
+*.la
+
+# http://www.gnu.org/software/gcc
+*.o
+*.lo
+*.so
+
