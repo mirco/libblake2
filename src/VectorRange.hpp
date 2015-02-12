@@ -93,10 +93,14 @@ class VectorRange<const char *, 16> {
 	uint64_t operator[](const size_t &index) const {
 		assert(index < 16);
 
-		auto i = start + index;
+		auto i = (start + index)*8;
 		if (i >= size)
 			return 0u;
-
+		if(i+8>=size){
+			auto result = 0u;
+			memcpy(&result, data + i, size - i);
+			return result;
+		}
 		return *reinterpret_cast<const uint64_t*> (data + i);
 	}
     private:
