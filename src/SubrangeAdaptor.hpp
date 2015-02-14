@@ -13,12 +13,12 @@
 namespace Blake2 {
 
 template<class Container, size_t size>
-class VectorRange {
+class SubrangeAdaptor {
     public:
 
-	VectorRange(const Container &c) : start(0), cont(&c) { }
+	SubrangeAdaptor(const Container &c) : start(0), cont(&c) { }
 
-	VectorRange operator++() {
+	SubrangeAdaptor operator++() {
 		auto t_size = sizeof(uint64_t) / sizeof(typename Container::value_type);
 		assert(start + size < cont->size() * t_size);
 		start += size;
@@ -50,12 +50,12 @@ class VectorRange {
 };
 
 template<>
-class VectorRange<vector<uint64_t>, 16> {
+class SubrangeAdaptor<vector<uint64_t>, 16> {
     public:
 
-	VectorRange(const vector<uint64_t> &v) : start(0), vec(&v) { }
+	SubrangeAdaptor(const vector<uint64_t> &v) : start(0), vec(&v) { }
 
-	VectorRange operator++() {
+	SubrangeAdaptor operator++() {
 		assert(start + 16 < vec->size());
 		start += 16;
 
@@ -78,12 +78,12 @@ class VectorRange<vector<uint64_t>, 16> {
 };
 
 template<>
-class VectorRange<const char *, 16> {
+class SubrangeAdaptor<const char *, 16> {
     public:
 
-	VectorRange(const char *d, const size_t &len) : start(0), data(d), size(len) { }
+	SubrangeAdaptor(const char *d, const size_t &len) : start(0), data(d), size(len) { }
 
-	VectorRange operator++() {
+	SubrangeAdaptor operator++() {
 		assert((start + 16) * sizeof(uint64_t) < size);
 		start += 16;
 

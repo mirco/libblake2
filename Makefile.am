@@ -17,6 +17,6 @@ libblake2_la_SOURCES = \
     src/Blake2b.hpp \
     src/blake2b-capi.cpp \
     src/blake2b.h \
-    src/VectorRange.hpp
+    src/SubrangeAdaptor.hpp
 
 pkginclude_HEADERS = src/blake2b.h

@@ -6,7 +6,7 @@
  */
 
 #include "Blake2b.hpp"
-#include "VectorRange.hpp"
+#include "SubrangeAdaptor.hpp"
 
 #include <algorithm>
 #include <array>
@@ -44,7 +44,7 @@ constexpr Blake2b::sigma_t Blake2b::p_m;
 using counter_t = array<uint64_t, 2>;
 using final_flag_t = array<uint64_t, 2>;
 template<class Container>
-using data_t = VectorRange<Container, 16>;
+using data_t = SubrangeAdaptor<Container, 16>;
 using state_vector_t = array<uint64_t, 16>;
 
 #define HASH_INIT {0,0,0,0,0,0,0,0}
