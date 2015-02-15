@@ -30,6 +30,12 @@ class SubrangeAdaptor {
     public:
 
 	SubrangeAdaptor(const Container &c) : start(0), cont(c) { }
+	SubrangeAdaptor() = delete;
+	SubrangeAdaptor(const SubrangeAdaptor&) = default;
+	SubrangeAdaptor(SubrangeAdaptor &&) = default;
+	SubrangeAdaptor<Container, size>& operator=(const SubrangeAdaptor&) = default;
+	SubrangeAdaptor<Container, size>& operator=(SubrangeAdaptor&&) = default;
+	~SubrangeAdaptor() = default;
 
 	SubrangeAdaptor operator++() {
 		auto t_size = sizeof(uint64_t) / sizeof(typename Container::value_type);
