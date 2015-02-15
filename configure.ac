@@ -11,6 +11,10 @@ fi
 AC_PROG_CXX
 AM_PROG_AR
 
+AC_LANG_PUSH([C++])
+AC_CHECK_HEADER([gtest/gtest.h],[],AC_MSG_ERROR(google test not found))
+AC_LANG_POP([C++])
+
 LT_INIT
 
 AC_OUTPUT([Makefile])
