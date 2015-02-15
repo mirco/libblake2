@@ -20,6 +20,7 @@
 #pragma once
 
 #include <array>
+#include <cstring>
 #include <vector>
 
 namespace Blake2 {
