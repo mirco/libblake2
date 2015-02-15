@@ -28,11 +28,11 @@ template<class Container, size_t size>
 class SubrangeAdaptor {
     public:
 
-	SubrangeAdaptor(const Container &c) : start(0), cont(&c) { }
+	SubrangeAdaptor(const Container &c) : start(0), cont(c) { }
 
 	SubrangeAdaptor operator++() {
 		auto t_size = sizeof(uint64_t) / sizeof(typename Container::value_type);
-		assert(start + size < cont->size() * t_size);
+		assert(start + size < cont.size() * t_size);
 		start += size;
 
 		return *this;
@@ -44,31 +44,31 @@ class SubrangeAdaptor {
 
 		auto i = (start + index) * t_size;
 		// simulate the padding so we don't have to copy the input
-		if (i >= cont->size())
+		if (i >= cont.size())
 			return 0;
-		else if (i + t_size >= cont->size()) {
+		else if (i + t_size >= cont.size()) {
 			auto result = 0u;
-			memcpy(&result, cont->data() + i, cont->size() - i);
+			memcpy(&result, cont.data() + i, cont.size() - i);
 
 			return result;
 		}
 
-		return *reinterpret_cast<const uint64_t*> (cont->data() + i);
+		return *reinterpret_cast<const uint64_t*> (cont.data() + i);
 	}
 
     private:
 	size_t start;
-	const Container *cont;
+	const Container &cont;
 };
 
 template<>
 class SubrangeAdaptor<vector<uint64_t>, 16> {
     public:
 
-	SubrangeAdaptor(const vector<uint64_t> &v) : start(0), vec(&v) { }
+	SubrangeAdaptor(const vector<uint64_t> &v) : start(0), vec(v) { }
 
 	SubrangeAdaptor operator++() {
-		assert(start + 16 < vec->size());
+		assert(start + 16 < vec.size());
 		start += 16;
 
 		return *this;
@@ -78,15 +78,15 @@ class SubrangeAdaptor<vector<uint64_t>, 16> {
 		assert(index < 16);
 
 		auto i = start + index;
-		if (i >= vec->size())
+		if (i >= vec.size())
 
 			return 0u;
 
-		return vec->at(i);
+		return vec.at(i);
 	}
     private:
 	size_t start;
-	const vector<uint64_t> *vec;
+	const vector<uint64_t> &vec;
 };
 
 template<>
