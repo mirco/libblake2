@@ -20,3 +20,13 @@ libblake2_la_SOURCES = \
     src/SubrangeAdaptor.hpp
 
 pkginclude_HEADERS = src/blake2b.h
+
+tests = \
+    test-blake2b
+
+check_PROGRAMS = $(tests)
+TESTS = $(tests)
+
+test_blake2b_SOURCES = src/test-blake2b.cpp
+test_blake2b_LDADD = libblake2.la
+test_blake2b_LDFLAGS = -static -lgtest
