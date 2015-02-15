@@ -15,7 +15,7 @@
 
   You should have received a copy of the GNU Lesser General Public License
   along with libblake2; If not, see <http://www.gnu.org/licenses/>.
-***/
+ ***/
 
 #include "Blake2b.hpp"
 #include "SubrangeAdaptor.hpp"
@@ -102,7 +102,7 @@ Blake2b::Blake2b(const unsigned int &digestLength,
 	assert(keyLength <= 64);
 
 	setup_parameter_block();
-	
+
 	parameter_block.pbs.digest_length = static_cast<uint8_t> (digestLength);
 	parameter_block.pbs.key_length = static_cast<uint8_t> (keyLength);
 
@@ -166,7 +166,7 @@ void Blake2b::setup_parameter_block() {
 
 template<class Container>
 static data_t<Container> initialize_m(const Container& data, const size_t &len) {
-	(void)len; // to silence unused parameter warning
+	(void) len; // to silence unused parameter warning
 	return data_t<Container>(data);
 }
 
@@ -179,8 +179,10 @@ template<class Container>
 hash_t Blake2b::hash_internal(const Container &v_m, const size_t &orig_size) {
 	auto h = initialize_h();
 	auto m = initialize_m(v_m, orig_size);
-	auto t = counter_t{{0, 0}};
-	auto f = final_flag_t{{0, 0}};
+	auto t = counter_t{
+		{0, 0}};
+	auto f = final_flag_t{
+		{0, 0}};
 
 	// Iterate through all complete 16 word chunks of the message.
 	// If the message size is a multiple of 16*word size make sure to leave

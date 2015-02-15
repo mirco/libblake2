@@ -15,7 +15,7 @@
 
   You should have received a copy of the GNU Lesser General Public License
   along with libblake2; If not, see <http://www.gnu.org/licenses/>.
-***/
+ ***/
 
 #include "Blake2b.hpp"
 #include "blake2b.h"
@@ -79,7 +79,7 @@ int blake2b_set_personalization(blake2b *b, const char * const personalization, 
 	return 0;
 }
 
-int blake2b_hash(blake2b *b, const char *const message, const size_t len, uint8_t *const hash) {
+int blake2b_hash(blake2b *b, const char *const message, const size_t len, uint8_t * const hash) {
 	assert(b);
 	assert(message);
 	assert(hash);
@@ -99,9 +99,9 @@ int blake2b_hash_to_hex(const uint8_t * const hash, const size_t hlen, char *con
 		size_t i;
 		std::stringstream result;
 		result << std::setfill('0') << std::hex;
-		for(i = 0; i < hlen; ++i)
-			result << std::setw(2) << (unsigned int)hash[i];
-		memcpy(output, result.str().data(), hlen*2 + 1);
+		for (i = 0; i < hlen; ++i)
+			result << std::setw(2) << (unsigned int) hash[i];
+		memcpy(output, result.str().data(), hlen * 2 + 1);
 		return 0;
 	} catch (exception &e) {
 		return -1;

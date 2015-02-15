@@ -15,7 +15,7 @@
 
   You should have received a copy of the GNU Lesser General Public License
   along with libblake2; If not, see <http://www.gnu.org/licenses/>.
-***/
+ ***/
 
 #pragma once
 
@@ -108,7 +108,7 @@ class SubrangeAdaptor<const char *, 16> {
 		auto i = (start + index)*8;
 		if (i >= size)
 			return 0u;
-		if(i+8>=size){
+		if (i + 8 >= size) {
 			auto result = 0u;
 			memcpy(&result, data + i, size - i);
 			return result;

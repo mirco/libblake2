@@ -15,7 +15,7 @@
 
   You should have received a copy of the GNU Lesser General Public License
   along with libblake2; If not, see <http://www.gnu.org/licenses/>.
-***/
+ ***/
 
 #ifndef BLAKE2B_CAPI_H
 #define	BLAKE2B_CAPI_H
