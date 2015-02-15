@@ -68,10 +68,10 @@ TEST_F(Blake2bTest, pangram){
 
 TEST(testBlake2b, hexBinConvert) {
 	uint8_t hash[64];
-	auto ret = blake2b_hex_to_hash(empty_hash, 129, hash, 64)
+	auto ret = blake2b_hex_to_hash(empty_hash, 129, hash, 64);
 	ASSERT_EQ(0, ret);
 	char hex[129];
-	auto ret = blake2b_hash_to_hex(hash, 64, hex);
+	ret = blake2b_hash_to_hex(hash, 64, hex);
 	ASSERT_EQ(0, ret);
 	ASSERT_STRCASEEQ(empty_hash, hex);
 }
