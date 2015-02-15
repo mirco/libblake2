@@ -42,7 +42,6 @@ blake2b *blake2b_new() {
 
 void blake2b_delete(blake2b* b) {
 	delete b;
-	b = NULL;
 }
 
 int blake2b_set_digest_length(blake2b *b, const size_t digest_len) {
