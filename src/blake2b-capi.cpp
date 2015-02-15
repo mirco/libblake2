@@ -108,6 +108,24 @@ int blake2b_hash_to_hex(const uint8_t * const hash, const size_t hlen, char *con
 	}
 }
 
-int blake2b_hex_to_hash(const char *const hex, const size_t hexlen, uint8_t *const hash, const size_t hashlen);
+int blake2b_hex_to_hash(const char *const hex, const size_t hexlen, uint8_t * const hash, const size_t hashlen) {
+	assert(hex);
+	assert(hash);
+	assert(hexlen == hashlen * 2 + 1);
+	try {
+		auto j = hash;
+		for (auto i = hex; (size_t)(i - hex) < hexlen; i += 2) {
+			std::stringstream tmp;
+			tmp << std::hex << *i << *(i + 1);
+			unsigned int result;
+			tmp >> result;
+			*j = result;
+			++j;
+		}
+		return 0;
+	} catch (exception &e) {
+		return -1;
+	}
+}
 
 } // extern "C"
