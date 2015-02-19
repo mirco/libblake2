@@ -32,3 +32,7 @@ ltmain.sh
 *.so
 .deps/
 .dirstamp
+
+# https://netbeans.org/
+.dep.inc
+nbproject
