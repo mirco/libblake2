@@ -1,4 +1,5 @@
 ACLOCAL_AMFLAGS = -I m4
+
 AM_CFLAGS = \
     -Wall \
     -O3 \
@@ -6,7 +7,18 @@ AM_CFLAGS = \
     -Wpedantic \
     -pipe \
     -fvisibility=hidden \
-    -fvisibility-inlines-hidden
+    -fvisibility-inlines-hidden \
+	-flto \
+	-ffat-lto-objects
+
+AM_LDFLAGS = \
+	-Wl,--as-needed \
+	-Wl,--no-undefined \
+	-Wl,--gc-sections \
+	-Wl,-z,relro \
+	-Wl,-z,now \
+	-Wl,-fuse-ld=gold \
+	-pie
 
 AM_CXXFLAGS = $(AM_CFLAGS) -std=c++14
 
