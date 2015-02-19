@@ -25,6 +25,8 @@
 
 namespace Blake2 {
 
+using std::vector;
+
 template<class Container, size_t size>
 class SubrangeAdaptor {
     public:
@@ -100,10 +102,22 @@ template<>
 class SubrangeAdaptor<const char *, 16> {
     public:
 
-	SubrangeAdaptor(const char *d, const size_t &len) : start(0), data(d), size(len) { }
+	SubrangeAdaptor(const char *d, const size_t &len) : start(0), data(d), size(len) {
+		if (len < 16 * 8) {
+			p.resize(16 * 8);
+			memcpy(p.data(), d, len);
+		}
+	}
 
 	SubrangeAdaptor operator++() {
-		assert((start + 16) * sizeof(uint64_t) < size);
+		auto offset = (start + 16) * sizeof(uint64_t);
+		assert(offset < size);
+
+		if (offset + 16 * 8 > size) {
+			p.resize(16 * 8);
+			memcpy(p.data(), &data[offset], size - offset);
+		}
+
 		start += 16;
 
 		return *this;
@@ -112,20 +126,20 @@ class SubrangeAdaptor<const char *, 16> {
 	uint64_t operator[](const size_t &index) const {
 		assert(index < 16);
 
-		auto i = (start + index)*8;
-		if (i >= size)
-			return 0u;
-		if (i + 8 >= size) {
-			auto result = 0u;
-			memcpy(&result, data + i, size - i);
-			return result;
+		if (!p.empty()) {
+			return p[index];
 		}
-		return *reinterpret_cast<const uint64_t*> (data + i);
+
+		auto offset = (start + index)*8;
+
+		return *reinterpret_cast<const uint64_t*> (data + offset);
 	}
+
     private:
 	size_t start;
 	const char *data;
 	size_t size;
+	vector<uint64_t> p;
 };
 
 } // namespace Blake2
