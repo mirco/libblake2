@@ -60,4 +60,3 @@ BLAKE2_EXPORT_SYMBOL int blake2b_hex_to_hash(const char *const hex, const size_t
 #endif // __cplusplus
 
 #endif	// BLAKE2B_CAPI_H
-

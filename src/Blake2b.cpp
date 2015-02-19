@@ -180,9 +180,11 @@ hash_t Blake2b::hash_internal(const Container &v_m, const size_t &orig_size) {
 	auto h = initialize_h();
 	auto m = initialize_m(v_m, orig_size);
 	auto t = counter_t{
-		{0, 0}};
+		{0, 0}
+	};
 	auto f = final_flag_t{
-		{0, 0}};
+		{0, 0}
+	};
 
 	// Iterate through all complete 16 word chunks of the message.
 	// If the message size is a multiple of 16*word size make sure to leave

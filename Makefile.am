@@ -8,8 +8,8 @@ AM_CFLAGS = \
     -pipe \
     -fvisibility=hidden \
     -fvisibility-inlines-hidden \
-	-flto \
-	-ffat-lto-objects
+    -flto \
+    -ffat-lto-objects
 
 AM_LDFLAGS = \
 	-Wl,--as-needed \
