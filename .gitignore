@@ -4,6 +4,7 @@ Makefile.in
 test-blake2b*
 test-driver
 test-suite.log
+blake2b
 
 # http://www.gnu.org/software/autoconf
 

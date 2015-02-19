@@ -23,6 +23,7 @@ AM_LDFLAGS = \
 AM_CXXFLAGS = $(AM_CFLAGS) -std=c++14
 
 lib_LTLIBRARIES = libblake2.la
+bin_PROGRAMS = blake2b
 
 libblake2_la_SOURCES = \
     src/Blake2b.cpp \
@@ -30,6 +31,12 @@ libblake2_la_SOURCES = \
     src/blake2b-capi.cpp \
     src/blake2b.h \
     src/SubrangeAdaptor.hpp
+
+blake2b_SOURCES = \
+    src/blake2b.c
+
+blake2b_CFLAGS = -I/usr/include/libblake2
+blake2b_LDFLAGS = -lblake2
 
 pkginclude_HEADERS = src/blake2b.h
 
