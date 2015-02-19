@@ -165,6 +165,7 @@ class Blake2b {
 	};
 	ParameterBlockUnion parameter_block;
 
+	static_assert(sizeof(struct ParameterBlock) == sizeof(array<uint64_t, 8>), "size mismatch");
 };
 
 } // namespace Blake2
